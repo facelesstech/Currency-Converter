@@ -31,7 +31,7 @@ C8888     d888 888b 888 88b  Y8b Y8P  d88 88b 888 "  d88888 d88 88b 888 "
  Y888  ,d Y888 888P 888 888   Y8b "   888   , 888     888   888   , 888    
   "88,d88  "88 88"  888 888    Y8P     "YeeP" 888     888    "YeeP" 888  
 
-ver 0.1 alpha\033[0m
+ver 0.2 alpha\033[0m
 '''
     print "The current exchange rate is \033[1;31m%r\033[0m do you want to reset it?" % text
     print "1. Yes 2. No"
@@ -61,7 +61,11 @@ def old():
         text = target.read()
         print "Enter amount here."
         amount = raw_input("> ")
-        exchange = decimal.Decimal(text) * decimal.Decimal(amount)
-        print "\033[1;31m%0.2f\033[0m" % exchange   
+        if amount.isdigit():
+            exchange = decimal.Decimal(text) * decimal.Decimal(amount)
+            print "\033[1;31m%0.2f\033[0m" % exchange
+        else:
+            print "\033[1;31mThat's not a number.\033[0m"
+            old()   
     
 pick()
