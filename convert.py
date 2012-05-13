@@ -17,7 +17,7 @@ class start(object):
            \  `.
             '.  `-----.
               '-.____.'
-Ver 0.5 alpha
+Ver 0.6 alpha
 \033[0m              
 '''
         
