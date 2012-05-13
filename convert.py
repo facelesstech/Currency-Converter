@@ -1,12 +1,12 @@
 import decimal
 import os
 
-def pick():
-    os.system('clear')
-    target = open("convert.txt")
-    text = target.read()
-    print '''\033[1;37m
-                 _____
+class start(object):
+
+    def __init__(self):
+        self.start = start
+        print '''\033[1;37m
+                _____
               .-'     `-.
             .'  .-"""-.-'
            /  .'
@@ -17,51 +17,49 @@ def pick():
            \  `.
             '.  `-----.
               '-.____.'
-  e88'Y88                                                            
- d888  'Y 8888 8888 888,8, 888,8,  ,e e,  888 8e   e88'888 Y8b Y888P 
-C8888     8888 8888 888 "  888 "  d88 88b 888 88b d888  '8  Y8b Y8P  
- Y888  ,d Y888 888P 888    888    888   , 888 888 Y888   ,   Y8b Y   
-  "88,d88  "88 88"  888    888     "YeeP" 888 888  "88,e8'    888    
-                                                              888    
-                                                              888    
-
-  e88'Y88                                              d8                  
- d888  'Y  e88 88e  888 8e  Y8b Y888P  ,e e,  888,8,  d88    ,e e,  888,8, 
-C8888     d888 888b 888 88b  Y8b Y8P  d88 88b 888 "  d88888 d88 88b 888 "  
- Y888  ,d Y888 888P 888 888   Y8b "   888   , 888     888   888   , 888    
-  "88,d88  "88 88"  888 888    Y8P     "YeeP" 888     888    "YeeP" 888  
-
-ver 0.3 alpha\033[0m
+\033[0m              
 '''
-    print "The current exchange rate is \033[1;31m%r\033[0m do you want to reset it?" % text
-    print "1. Yes 2. No"
-    question = raw_input("> ")
-    if "1" in question:
-        new()
-    elif "2" in question:
-        old()
-    else:
-        pick()
-
-def new():
-    target = open("convert.txt", "w")
-    print "Enter the exchange rate now."
-    rate = raw_input("> ")
-    target.write(rate)
-    target.close()
-    old()
-    
-def old():
-    text1 = os.stat("convert.txt").st_size
-    if text1 <= 0:
-        print "There is no exchange rate set."
-        new()
-    else:
+        
+    def convert(self):
         target = open("convert.txt")
-        text = target.read()
-        print "Enter amount here."
-        amount = raw_input("> ")
-        exchange = decimal.Decimal(text) * decimal.Decimal(amount)
-        print "\033[1;31m%0.2f\033[0m" % exchange
-    
-pick()
+        rate = target.read()
+        print "The rate is currently set at \033[1;36m%r\033[0m" % rate
+        print "Set rate '1' use rate '2'"
+        pick = raw_input("> ")
+        if pick == "2":
+            check = os.stat("convert.txt").st_size
+            if check <= 0:
+                print "There is no exchange rate set."
+                print "Enter rate."
+                exchange = raw_input("> ")
+                target = open("convert.txt", "w")
+                target.write(exchange)
+                target = open("convert.txt")
+                rate = target.read()
+                print "Enter amount here"
+                amount = raw_input("> ")
+                final = decimal.Decimal(rate) * int(amount)
+            else:    
+                target = open("convert.txt")
+                rate = target.read()
+                print "Enter amount here"
+                amount = raw_input("> ")
+                final = decimal.Decimal(rate) * int(amount)
+        elif pick == "1":
+            target = open("convert.txt", "w")
+            print "Enter rate"
+            exchange = raw_input("> ")
+            target.write(exchange)
+            target.close()
+            target = open("convert.txt")
+            rate = target.read()
+            print "Enter amount here"
+            amount = raw_input("> ")
+            final = decimal.Decimal(rate) * int(amount)
+        else:
+            print "Ether pick '1' or '2'"
+            convert()
+        return final
+        
+a = start()
+print "\033[1;36m%0.2f\033[0m" % a.convert()
