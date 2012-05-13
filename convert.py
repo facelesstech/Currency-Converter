@@ -6,7 +6,7 @@ class start(object):
     def __init__(self):
         self.start = start
         print '''\033[1;37m
-                _____
+                 _____
               .-'     `-.
             .'  .-"""-.-'
            /  .'
@@ -59,7 +59,8 @@ Ver 0.5 alpha
             final = decimal.Decimal(rate) * int(amount)
         else:
             print "Ether pick '1' or '2'"
-            convert()
+            a = start()
+            a.convert()
         return final
         
 a = start()
