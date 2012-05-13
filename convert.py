@@ -17,7 +17,7 @@ class start(object):
            \  `.
             '.  `-----.
               '-.____.'
-Ver 0.6 alpha
+Ver 0.7 alpha
 \033[0m              
 '''
         
@@ -39,13 +39,13 @@ Ver 0.6 alpha
                 rate = target.read()
                 print "Enter amount here"
                 amount = raw_input("> ")
-                final = decimal.Decimal(rate) * int(amount)
+                final = decimal.Decimal(rate) * decimal.Decimal(amount)
             else:    
                 target = open("convert.txt")
                 rate = target.read()
                 print "Enter amount here"
                 amount = raw_input("> ")
-                final = decimal.Decimal(rate) * int(amount)
+                final = decimal.Decimal(rate) * decimal.Decimal(amount)
         elif pick == "1":
             target = open("convert.txt", "w")
             print "Enter rate"
@@ -56,11 +56,10 @@ Ver 0.6 alpha
             rate = target.read()
             print "Enter amount here"
             amount = raw_input("> ")
-            final = decimal.Decimal(rate) * int(amount)
+            final = decimal.Decimal(rate) * decimal.Decimal(amount)
         else:
             print "Ether pick '1' or '2'"
-            a = start()
-            a.convert()
+            exit()
         return final
         
 a = start()
