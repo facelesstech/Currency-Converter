@@ -1,66 +1,76 @@
 import decimal
 import os
-
-class start(object):
+class convert(object):
 
     def __init__(self):
-        self.start = start
         print '''\033[1;37m
-                 _____
-              .-'     `-.
-            .'  .-"""-.-'
-           /  .'
-      .---' '--------.
-       """:  :"""""""
-    .-----'  '-----.
-     """""\  \"""""
-           \  `.
-            '.  `-----.
-              '-.____.'
-Ver 0.7 alpha
-\033[0m              
+ dP"Yb    .d   .d  dP"Yb    .d   .d  dP"Yb    .d     
+dP   Yb .d88 .d88 dP   Yb .d88 .d88 dP   Yb .d88     
+Yb   dP   88   88 Yb   dP   88   88 Yb   dP   88     
+ YbodP    88   88  YbodP    88   88  YbodP    88     
+
+ dP"Yb    .d   .d  dP"Yb    .d   .d   .d   .d     
+dP   Yb .d88 .d88 dP   Yb .d88 .d88 .d88 .d88     
+Yb   dP   88   88 Yb   dP   88   88   88   88     
+ YbodP    88   88  YbodP    88   88   88   88     
+
+ dP"Yb    .d   .d  dP"Yb    .d   .d   .d  dP"Yb      
+dP   Yb .d88 .d88 dP   Yb .d88 .d88 .d88 dP   Yb     
+Yb   dP   88   88 Yb   dP   88   88   88 Yb   dP     
+ YbodP    88   88  YbodP    88   88   88  YbodP      
+
+ dP"Yb    .d   .d  dP"Yb   dP"Yb    .d  dP"Yb    .d     
+dP   Yb .d88 .d88 dP   Yb dP   Yb .d88 dP   Yb .d88     
+Yb   dP   88   88 Yb   dP Yb   dP   88 Yb   dP   88     
+ YbodP    88   88  YbodP   YbodP    88  YbodP    88     
+
+ dP"Yb    .d   .d   .d   .d  dP"Yb   dP"Yb    .d 
+dP   Yb .d88 .d88 .d88 .d88 dP   Yb dP   Yb .d88 
+Yb   dP   88   88   88   88 Yb   dP Yb   dP   88 
+ YbodP    88   88   88   88  YbodP   YbodP    88 
+
+ver 0.1 beta\033[0m
 '''
-        
-    def convert(self):
-        target = open("convert.txt")
-        rate = target.read()
-        print "The rate is currently set at \033[1;36m%r\033[0m" % rate
-        print "Set rate '1' use rate '2'"
+        self.opentxt()
+        print "Set rate press '1' or press '2' to use this rate \033[1;36m%r\033[0m" % self.rate
         pick = raw_input("> ")
-        if pick == "2":
-            check = os.stat("convert.txt").st_size
-            if check <= 0:
-                print "There is no exchange rate set."
-                print "Enter rate."
-                exchange = raw_input("> ")
-                target = open("convert.txt", "w")
-                target.write(exchange)
-                target = open("convert.txt")
-                rate = target.read()
-                print "Enter amount here"
-                amount = raw_input("> ")
-                final = decimal.Decimal(rate) * decimal.Decimal(amount)
-            else:    
-                target = open("convert.txt")
-                rate = target.read()
-                print "Enter amount here"
-                amount = raw_input("> ")
-                final = decimal.Decimal(rate) * decimal.Decimal(amount)
-        elif pick == "1":
-            target = open("convert.txt", "w")
-            print "Enter rate"
-            exchange = raw_input("> ")
-            target.write(exchange)
-            target.close()
-            target = open("convert.txt")
-            rate = target.read()
+        if pick == "1":
+            self.convertset()
+        elif pick == "2":
+            self.justconvert()
+        else:
+            self.__init__()
+    
+    def opentxt(self):
+        target = open("convert.txt")
+        self.rate = target.read()        
+        
+    def opentxtwrite(self):
+        target = open("convert.txt", "w")
+        print "Enter rate now."
+        rate = raw_input("> ")
+        target.write(rate)
+        
+    def dothemath(self):
+        check = os.stat("convert.txt").st_size
+        if check <=0:
+            print "There is no exchange rate set."
+            self.opentxtwrite()
+            self.justconvert()
+        else:        
             print "Enter amount here"
             amount = raw_input("> ")
-            final = decimal.Decimal(rate) * decimal.Decimal(amount)
-        else:
-            print "Ether pick '1' or '2'"
-            exit()
-        return final
+            final = decimal.Decimal(self.rate) * decimal.Decimal(amount)
+            print "\033[1;36m%0.2f\033[0m" % final
         
-a = start()
-print "\033[1;36m%0.2f\033[0m" % a.convert()
+        
+    def convertset(self):
+        self.opentxtwrite()
+        self.opentxt()
+        self.dothemath()
+        
+    def justconvert(self):
+        self.opentxt()
+        self.dothemath()
+        
+a = convert()
