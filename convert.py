@@ -1,9 +1,11 @@
 import decimal
 import os
-class convert(object):
+class Convert(object):
 
     def __init__(self):
-        print '''\033[1;37m
+        
+        def start(self):
+            print '''\033[1;37m
  dP"Yb    .d   .d  dP"Yb    .d   .d  dP"Yb    .d     
 dP   Yb .d88 .d88 dP   Yb .d88 .d88 dP   Yb .d88     
 Yb   dP   88   88 Yb   dP   88   88 Yb   dP   88     
@@ -30,7 +32,7 @@ Yb   dP   88   88   88   88 Yb   dP Yb   dP   88
  YbodP    88   88   88   88  YbodP   YbodP    88 
 
 ver 0.1 beta\033[0m
-'''
+'''        
         self.opentxt()
         print "Set rate press '1' or press '2' to use this rate \033[1;36m%r\033[0m" % self.rate
         pick = raw_input("> ")
@@ -68,9 +70,12 @@ ver 0.1 beta\033[0m
         self.opentxtwrite()
         self.opentxt()
         self.dothemath()
+        exit()
         
     def justconvert(self):
         self.opentxt()
         self.dothemath()
+        exit()
         
-a = convert()
+a = Convert()
+a.start()
