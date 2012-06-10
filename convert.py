@@ -1,9 +1,10 @@
 import decimal
 import os
 class Convert(object):
+    pass
 
     def __init__(self):
-        self.start()
+        pass
         
     def start(self):
         print '''\033[1;37m
@@ -32,7 +33,7 @@ dP   Yb .d88 .d88 .d88 .d88 dP   Yb dP   Yb .d88
 Yb   dP   88   88   88   88 Yb   dP Yb   dP   88 
  YbodP    88   88   88   88  YbodP   YbodP    88 
 
-ver 0.2 beta\033[0m
+ver 0.3 beta\033[0m
 '''        
         self.opentxt()
         print "Set rate press '1' or press '2' to use this rate \033[1;36m%r\033[0m" % self.rate
