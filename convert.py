@@ -1,5 +1,6 @@
 import decimal
 import os
+import pickle
 class Convert(object):
     pass
 
@@ -44,16 +45,16 @@ ver 0.3 beta\033[0m
             self.justconvert()
         else:
             self.__init__()
-    
+        
     def opentxt(self):
-        target = open("convert.txt")
-        self.rate = target.read()        
+        target = open('convert.txt', 'rb')
+        self.rate = pickle.load(target)        
         
     def opentxtwrite(self):
-        target = open("convert.txt", "w")
-        print "Enter rate now."
-        rate = raw_input("> ")
-        target.write(rate)
+        target = open('convert.txt', 'wb')
+        rate = raw_input("Enter rate now > ")
+        pickle.dump(rate, target)
+        target.close()
         
     def dothemath(self):
         check = os.stat("convert.txt").st_size
