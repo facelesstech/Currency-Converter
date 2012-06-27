@@ -1,11 +1,6 @@
 import decimal
 import os
-import pickle
 class Convert(object):
-    pass
-
-    def __init__(self):
-        pass
         
     def start(self):
         print '''\033[1;37m
@@ -34,7 +29,7 @@ dP   Yb .d88 .d88 .d88 .d88 dP   Yb dP   Yb .d88
 Yb   dP   88   88   88   88 Yb   dP Yb   dP   88 
  YbodP    88   88   88   88  YbodP   YbodP    88 
 
-ver 0.3 beta\033[0m
+ver 0.1 beta\033[0m
 '''        
         self.opentxt()
         print "Set rate press '1' or press '2' to use this rate \033[1;36m%r\033[0m" % self.rate
@@ -45,16 +40,16 @@ ver 0.3 beta\033[0m
             self.justconvert()
         else:
             self.__init__()
-        
+    
     def opentxt(self):
-        target = open('convert.txt', 'rb')
-        self.rate = pickle.load(target)        
+        target = open("convert.txt")
+        self.rate = target.read()        
         
     def opentxtwrite(self):
-        target = open('convert.txt', 'wb')
-        rate = raw_input("Enter rate now > ")
-        pickle.dump(rate, target)
-        target.close()
+        target = open("convert.txt", "w")
+        print "Enter rate now."
+        rate = raw_input("> ")
+        target.write(rate)
         
     def dothemath(self):
         check = os.stat("convert.txt").st_size
