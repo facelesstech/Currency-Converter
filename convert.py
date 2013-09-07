@@ -1,9 +1,26 @@
-import decimal
-import os
+import decimal, os, sys
+
 class Convert(object):
         
-    def start(self):
-        print '''\033[1;37m
+    def opentxt(self):
+        target = open("convert.txt")
+        self.rate = target.read()        
+        
+    def opentxtwrite(self):
+        target = open("convert.txt", "w")
+        print "Enter rate now."
+        rate = raw_input("> ")
+        #print "Writing to file"
+        target.write(rate)
+        
+    def dothemath(self):        
+        print "Enter amount here"
+        amount = raw_input("> ")
+        self.final = decimal.Decimal(self.rate) * decimal.Decimal(amount)
+
+if __name__ == '__main__':
+    start = Convert()
+    print '''
  dP"Yb    .d   .d  dP"Yb    .d   .d  dP"Yb    .d     
 dP   Yb .d88 .d88 dP   Yb .d88 .d88 dP   Yb .d88     
 Yb   dP   88   88 Yb   dP   88   88 Yb   dP   88     
@@ -29,51 +46,29 @@ dP   Yb .d88 .d88 .d88 .d88 dP   Yb dP   Yb .d88
 Yb   dP   88   88   88   88 Yb   dP Yb   dP   88 
  YbodP    88   88   88   88  YbodP   YbodP    88 
 
-ver 0.1 beta\033[0m
+ver 0.1 beta
 '''        
-        self.opentxt()
-        print "Set rate press '1' or press '2' to use this rate \033[1;36m%r\033[0m" % self.rate
-        pick = raw_input("> ")
-        if pick == "1":
-            self.convertset()
-        elif pick == "2":
-            self.justconvert()
-        else:
-            self.__init__()
-    
-    def opentxt(self):
-        target = open("convert.txt")
-        self.rate = target.read()        
-        
-    def opentxtwrite(self):
-        target = open("convert.txt", "w")
-        print "Enter rate now."
-        rate = raw_input("> ")
-        target.write(rate)
-        
-    def dothemath(self):
-        check = os.stat("convert.txt").st_size
-        if check <=0:
-            print "There is no exchange rate set."
-            self.opentxtwrite()
-            self.justconvert()
-        else:        
-            print "Enter amount here"
-            amount = raw_input("> ")
-            final = decimal.Decimal(self.rate) * decimal.Decimal(amount)
-            print "\033[1;36m%0.2f\033[0m" % final
-        
-        
-    def convertset(self):
-        self.opentxtwrite()
-        self.opentxt()
-        self.dothemath()
-        exit()
-        
-    def justconvert(self):
-        self.opentxt()
-        self.dothemath()
-        exit()
-        
-a = Convert()
-a.start()
+start.opentxt()
+check = os.stat("convert.txt").st_size
+while check <= 0:
+    print "There is no exchange rate set."
+    start.opentxtwrite()
+    start.opentxt()
+    check = os.stat("convert.txt").st_size
+    start.dothemath()
+    print "> %.02f" % start.final
+    sys.exit()
+else:
+    print "Set rate press '1' or press '2' to use this rate %r" % start.rate
+    pick = raw_input("> ")
+    if pick == "1":
+        start.opentxt()
+        start.opentxtwrite()
+        start.dothemath()
+        print "> %.02f" % start.final
+    elif pick == "2":
+        start.opentxt()
+        start.dothemath()
+        print "> %.02f" % start.final
+    else:
+        print "Something went wrong"
